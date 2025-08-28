@@ -1,0 +1,27 @@
+int pylons(int k, vector<int> arr) {
+    int count = 0;
+    int i = 0;
+    int n = arr.size();
+
+    while (i < n) {
+        int plant_pos = -1;
+        int start = min(i + k - 1, n - 1);
+        int end = max(i - k + 1, 0);
+
+        for (int j = start; j >= end; j--) {
+            if (arr[j] == 1) {
+                plant_pos = j;
+                break;
+            }
+        }
+
+        if (plant_pos == -1) {
+            return -1;
+        }
+
+        count++;
+        i = plant_pos + k;
+    }
+
+    return count;
+}
