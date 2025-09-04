@@ -1,0 +1,38 @@
+int gcd(int a, int b) {
+        while (b) {
+            a %= b;
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+ 
+char* solve(int a, int b, int c) {
+    char* result = malloc(4 * sizeof(char));
+    if (a==0 && b==0) {
+        strcpy(result, c==0 ? "YES" : "NO");
+        return result;
+    }
+    if (a==0) {
+        strcpy(result, c==0 || c==b ? "YES" : "NO");
+        return result;
+    }
+    if (b==0) {
+        strcpy(result, c==0 || c==a ? "YES" : "NO");
+        return result;
+    }
+    int max_capacity = a>b ? a : b;
+    if (c > max_capacity) {
+        strcpy(result, "NO");
+        return result;
+    }
+    int g = gcd(a,b);
+    if(c % g == 0) {
+        strcpy(result, "YES");
+    }
+    else {
+        strcpy(result, "NO");
+    }
+    return result;
+}
