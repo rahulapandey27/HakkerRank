@@ -1,0 +1,34 @@
+int cmp(const void *a,const void *b){
+    long x=((long*)a)[0];
+    long y=((long*)b)[0];
+    if (x>y) return 1;
+    if (x<y) return -1;
+    return 0;
+}
+int minimumLoss(int price_count, long* price) {
+    long(*arr)[2] = malloc(price_count * sizeof *arr);
+    for (int i = 0; i < price_count; i++) {
+        arr[i][0] = price[i];
+        arr[i][1] = i;
+    }
+
+    qsort(arr, price_count, sizeof arr[0], cmp);
+
+    long minloss = LLONG_MAX;
+    for (int i = 1; i < price_count; i++) {
+        long higherPrice = arr[i][0];
+        long lowerPrice = arr[i - 1][0];
+        long higherYear = arr[i][1];
+        long lowerYear = arr[i - 1][1];
+
+        if (higherYear < lowerYear) {
+            long loss = higherPrice - lowerPrice;
+            if (loss < minloss) {
+                minloss = loss;
+            }
+        }
+    }
+
+    free(arr);
+    return (int)minloss;
+}
