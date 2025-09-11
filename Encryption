@@ -1,0 +1,32 @@
+char* encryption(char* s) {
+
+    int len =0;
+    for(int i=0; s[i]; i++){
+        if(s[i]!=' '){
+            s[len++]=s[i];
+        }
+    }
+    s[len]='\0';
+    double sqrt_len= sqrt(len);
+    int rows=(int)floor(sqrt_len);
+    int cols=(int)ceil(sqrt_len);
+    if(rows*cols<len){
+        rows++;
+    }
+    int result_size=len + cols+1;
+    char* result=malloc(result_size);
+    int pos=0;
+    for(int c=0; c<cols; c++){
+        for(int r=0; r<rows;r++){
+            int idx= r * cols + c;
+            if(idx<len){
+                result[pos++]=s[idx];
+            }
+        }result[pos++]=' ';
+        
+    }if(pos>0 && result[pos-1]==' '){
+        pos--;
+    }
+    result[pos]='\0';
+    return result;
+}
