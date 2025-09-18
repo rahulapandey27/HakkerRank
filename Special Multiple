@@ -1,0 +1,17 @@
+string solve(int n) {
+    string ans;
+    queue<long long> Q;
+    Q.push(9);
+    while(Q.size() !=0){
+        long long x=Q.front();
+        Q.pop();
+        if(x%n==0){
+            ans=to_string(x);
+            break;
+        }else{
+            Q.push(x*10);
+            Q.push(x*10 +9);
+        }
+    }return ans;
+
+}
