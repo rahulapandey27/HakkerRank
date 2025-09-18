@@ -1,0 +1,13 @@
+def counterGame(n):
+    cnt = 0
+    while n != 1:
+        if (n & (n - 1)) == 0:
+            # n is a power of 2
+            n >>= 1
+        else:
+            # subtract the largest power of 2 less than n
+            k = int(math.log2(n))
+            n -= 1 << k
+        cnt += 1
+
+    return 'Richard' if cnt % 2 == 0 else 'Louise'
