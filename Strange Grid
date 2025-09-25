@@ -1,0 +1,9 @@
+long strangeCounter(long t) {
+    long start=1;
+    long val=3;
+    while(t>start+val-1){
+        start=start+val;
+        val = val*2;
+    }return val-(t-start);
+
+}
